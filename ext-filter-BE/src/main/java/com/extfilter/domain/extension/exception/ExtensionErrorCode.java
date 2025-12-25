@@ -10,6 +10,7 @@ public enum ExtensionErrorCode implements ErrorCode {
     EXTENSION_LIMIT_EXCEEDED("EXT002", HttpStatus.FORBIDDEN, "커스텀 확장자는 최대 200개까지 추가할 수 있습니다."),
     FIXED_EXTENSION_NOT_FOUND("EXT003", HttpStatus.NOT_FOUND, "고정 확장자를 찾을 수 없습니다."),
     CUSTOM_EXTENSION_NOT_FOUND("EXT004", HttpStatus.NOT_FOUND, "커스텀 확장자를 찾을 수 없습니다."),
+    BLOCKED_EXTENSION("EXT005", HttpStatus.FORBIDDEN, "차단된 확장자입니다."),
     ;
 
     private final String code;
