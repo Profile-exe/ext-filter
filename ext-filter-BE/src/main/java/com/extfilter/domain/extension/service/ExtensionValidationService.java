@@ -1,5 +1,6 @@
 package com.extfilter.domain.extension.service;
 
+import com.extfilter.domain.extension.entity.FixedExtension;
 import com.extfilter.domain.extension.exception.DuplicateExtensionException;
 import com.extfilter.domain.extension.exception.ExtensionLimitExceededException;
 import com.extfilter.domain.extension.repository.CustomExtensionRepository;
@@ -39,5 +40,15 @@ public class ExtensionValidationService {
         if (existsInCustom) {
             throw new DuplicateExtensionException();
         }
+    }
+
+    public boolean isBlocked(String extension) {
+        boolean isFixedBlocked = fixedExtensionRepository.findByExtensionName(extension)
+                .map(FixedExtension::getIsBlocked)
+                .orElse(false);
+
+        boolean isCustomBlocked = customExtensionRepository.existsByExtensionName(extension);
+
+        return isFixedBlocked || isCustomBlocked;
     }
 }
