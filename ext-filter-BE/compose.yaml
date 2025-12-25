@@ -1,9 +1,9 @@
 services:
   postgres:
-    image: 'postgres:latest'
+    image: 'pgvector/pgvector:pg18'
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_DB=extfilter'
       - 'POSTGRES_USER=myuser'
+      - 'POSTGRES_PASSWORD=secret'
     ports:
-      - '5432'
+      - '5432:5432'
