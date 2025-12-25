@@ -1,5 +1,6 @@
 package com.extfilter.domain.extension.entity;
 
+import com.extfilter.common.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "fixed_extensions")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class FixedExtension {
+public class FixedExtension extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
