@@ -17,6 +17,9 @@ spring:
     baseline-on-migrate: true
     locations: classpath:db/migration
 
+server:
+  forward-headers-strategy: native
+
 logging:
   level:
     com.extfilter: DEBUG
