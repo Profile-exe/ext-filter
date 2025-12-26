@@ -30,11 +30,14 @@ function UploadTrendChart({ data, loading }) {
     return `${month}/${day}`;
   };
 
-  const chartData = data.map((item) => ({
-    date: formatDate(item.date),
-    전체: item.totalCount,
-    차단: item.blockedCount,
-  }));
+  // 날짜를 오름차순으로 정렬 (왼쪽: 과거, 오른쪽: 최신)
+  const chartData = [...data]
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .map((item) => ({
+      date: formatDate(item.date),
+      전체: item.totalCount,
+      차단: item.blockedCount,
+    }));
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-6">

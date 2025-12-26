@@ -1,4 +1,4 @@
-import Button from '../common/Button';
+import Button from "../common/Button";
 
 function Pagination({
   currentPage,
@@ -6,9 +6,9 @@ function Pagination({
   pageSize,
   onPageChange,
   onPageSizeChange,
-  loading
+  loading,
 }) {
-  const pageSizes = [10, 20, 50, 100];
+  const pageSizes = [5, 10, 20, 50, 100];
 
   const handlePrevious = () => {
     if (currentPage > 0) {
@@ -44,8 +44,8 @@ function Pagination({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4">
-      <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+    <div className="bg-white rounded-lg shadow-sm p-2">
+      <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
         {/* 페이지 크기 선택 */}
         <div className="flex items-center space-x-2">
           <span className="text-sm text-gray-700">페이지당</span>
@@ -83,8 +83,8 @@ function Pagination({
                 disabled={loading}
                 className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
                   currentPage === pageNum
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                    ? "bg-blue-600 text-white"
+                    : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-300"
                 } disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 {pageNum + 1}

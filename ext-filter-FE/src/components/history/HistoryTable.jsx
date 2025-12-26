@@ -40,22 +40,22 @@ function HistoryTable({ data, loading }) {
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
+        <table className="min-w-full table-fixed divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-32 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 날짜
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-64 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 파일명
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 확장자
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-28 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 파일 크기
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="w-24 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 상태
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -70,7 +70,7 @@ function HistoryTable({ data, loading }) {
                   {formatDate(item.createdAt)}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-900">
-                  <div className="max-w-xs truncate" title={item.originalFilename}>
+                  <div className="truncate" title={item.originalFilename}>
                     {item.originalFilename}
                   </div>
                 </td>
@@ -101,7 +101,7 @@ function HistoryTable({ data, loading }) {
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-600">
                   {item.storedFilename ? (
-                    <div className="max-w-xs truncate font-mono text-xs" title={item.storedFilename}>
+                    <div className="truncate font-mono text-xs" title={item.storedFilename}>
                       {item.storedFilename}
                     </div>
                   ) : (

@@ -23,10 +23,13 @@ function TopBlockedChart({ data, loading }) {
     );
   }
 
-  const chartData = data.map((item) => ({
-    name: item.fileExtension,
-    차단횟수: item.count,
-  }));
+  // 차단횟수 기준 내림차순 정렬 (왼쪽: 1위, 오른쪽: 순위 낮음)
+  const chartData = [...data]
+    .sort((a, b) => b.count - a.count)
+    .map((item) => ({
+      name: item.fileExtension,
+      차단횟수: item.count,
+    }));
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-6">
