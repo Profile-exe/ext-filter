@@ -2,10 +2,10 @@
 -- bat, cmd, com, cpl, exe, scr, js
 
 INSERT INTO fixed_extensions (extension_name, is_blocked) VALUES
-    ('bat', true),
-    ('cmd', true),
-    ('com', true),
-    ('cpl', true),
-    ('exe', true),
-    ('scr', true),
-    ('js', true);
+    ('bat', false),
+    ('cmd', false),
+    ('com', false),
+    ('cpl', false),
+    ('exe', false),
+    ('scr', false),
+    ('js', false);
