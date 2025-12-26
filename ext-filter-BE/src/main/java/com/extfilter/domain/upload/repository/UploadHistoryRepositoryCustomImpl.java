@@ -4,10 +4,11 @@ import static com.extfilter.domain.upload.entity.QUploadHistory.uploadHistory;
 
 import com.extfilter.domain.upload.dto.DailyUploadDto;
 import com.extfilter.domain.upload.dto.ExtensionCountDto;
+import com.extfilter.domain.upload.dto.QDailyUploadDto;
+import com.extfilter.domain.upload.dto.QExtensionCountDto;
 import com.extfilter.domain.upload.entity.UploadHistory;
 import com.extfilter.domain.upload.entity.UploadStatus;
 import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -61,8 +62,7 @@ public class UploadHistoryRepositoryCustomImpl implements UploadHistoryRepositor
             int limit
     ) {
         return queryFactory
-                .select(Projections.constructor(
-                        ExtensionCountDto.class,
+                .select(new QExtensionCountDto(
                         uploadHistory.fileExtension,
                         uploadHistory.count()
                 ))
@@ -77,8 +77,7 @@ public class UploadHistoryRepositoryCustomImpl implements UploadHistoryRepositor
     @Override
     public List<DailyUploadDto> findDailyUploadTrend(LocalDateTime startDate) {
         return queryFactory
-                .select(Projections.constructor(
-                        DailyUploadDto.class,
+                .select(new QDailyUploadDto(
                         uploadHistory.createdAt.min(),
                         uploadHistory.count(),
                         Expressions.numberTemplate(Long.class,
