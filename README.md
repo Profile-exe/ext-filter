@@ -217,19 +217,19 @@ npm run dev
 
 #### 확장자 관리
 
-| Method   | Endpoint                       | 설명                       |
-| -------- | ------------------------------ | -------------------------- |
-| `GET`    | `/api/extensions/fixed`        | 고정 확장자 목록 조회      |
-| `PUT`    | `/api/extensions/fixed/{name}` | 고정 확장자 차단 여부 토글 |
-| `GET`    | `/api/extensions/custom`       | 커스텀 확장자 목록 조회    |
-| `POST`   | `/api/extensions/custom`       | 커스텀 확장자 추가         |
-| `DELETE` | `/api/extensions/custom/{id}`  | 커스텀 확장자 삭제         |
+| Method   | Endpoint                                  | 설명                       |
+| -------- | ----------------------------------------- | -------------------------- |
+| `GET`    | `/api/extensions/fixed`                   | 고정 확장자 목록 조회      |
+| `PUT`    | `/api/extensions/fixed/{extension-name}`  | 고정 확장자 차단 여부 토글 |
+| `GET`    | `/api/extensions/custom`                  | 커스텀 확장자 목록 조회    |
+| `POST`   | `/api/extensions/custom`                  | 커스텀 확장자 추가         |
+| `DELETE` | `/api/extensions/custom/{extension-id}`   | 커스텀 확장자 삭제         |
 
 #### 파일 업로드
 
-| Method | Endpoint            | 설명                              |
-| ------ | ------------------- | --------------------------------- |
-| `POST` | `/api/files/upload` | 파일 업로드 (multipart/form-data) |
+| Method | Endpoint           | 설명                              |
+| ------ | ------------------ | --------------------------------- |
+| `POST` | `/api/uploads/file` | 파일 업로드 (multipart/form-data) |
 
 #### 업로드 이력
 
