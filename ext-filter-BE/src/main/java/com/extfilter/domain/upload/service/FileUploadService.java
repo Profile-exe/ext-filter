@@ -47,10 +47,10 @@ public class FileUploadService {
     }
 
     private FileUploadResponse handleNonBlockedExtension(MultipartFile file, String originalFilename, String extension) {
-        String storedFilename = FileUtils.generateStoredFilename(extension);
-        String storagePath = saveFile(file, storedFilename);
+        String storedFilename = FileUtils.generateStoredFilename(file.getOriginalFilename(), extension);
+        saveFile(file, storedFilename);
 
-        UploadHistory success = UploadHistory.success(originalFilename, extension, file.getSize(), storagePath);
+        UploadHistory success = UploadHistory.success(originalFilename, extension, file.getSize(), storedFilename);
         uploadHistoryService.saveUploadHistory(success);
 
         return FileUploadResponse.of(
@@ -62,7 +62,7 @@ public class FileUploadService {
         );
     }
 
-    private String saveFile(MultipartFile file, String storedFilename) {
+    private void saveFile(MultipartFile file, String storedFilename) {
         Path filePath = FileUtils.buildFilePath(UPLOAD_DIR, storedFilename);
         Path uploadPath = filePath.getParent();
 
@@ -71,7 +71,6 @@ public class FileUploadService {
                 Files.createDirectories(uploadPath);
             }
             file.transferTo(filePath.toFile());
-            return filePath.toString();
         } catch (IOException e) {
             throw new FileStorageFailureException();
         }

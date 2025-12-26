@@ -93,6 +93,8 @@ class FileUploadIntegrationTest {
         assertThat(response.fileExtension()).isEqualTo(extension);
         assertThat(response.storedFileName()).isNotNull();
         assertThat(response.storedFileName()).endsWith("." + extension);
+        assertThat(response.storedFileName()).contains("_"); // UUID 구분자 포함
+        assertThat(response.storedFileName()).startsWith("test"); // 원본 파일명으로 시작
         assertThat(response.fileSize()).isGreaterThan(0L);
         assertThat(response.uploadedAt()).isNotNull();
 
@@ -178,20 +180,22 @@ class FileUploadIntegrationTest {
                 .statusCode(HttpStatus.CREATED.value());
 
         List<UploadHistory> histories = uploadHistoryRepository.findAll();
-        String storedPath = histories.get(0).getStoredFilename();
+        String storedFilename = histories.get(0).getStoredFilename();
 
+        // 파일명만 확인 (경로 없어야 함)
+        assertThat(storedFilename).doesNotContain(File.separator)
+                .doesNotContain("/")
+                .contains("_") // UUID 구분자
+                .endsWith(".txt");
+
+        // 실제 파일이 날짜 디렉토리에 저장되었는지 확인
         LocalDate now = LocalDate.now();
-        String expectedPathPattern = String.format("%s%s%d%s%02d%s%02d",
-                UPLOAD_DIR,
-                File.separator,
-                now.getYear(),
-                File.separator,
-                now.getMonthValue(),
-                File.separator,
-                now.getDayOfMonth()
-        );
-
-        assertThat(storedPath).contains(expectedPathPattern);
+        Path expectedPath = Paths.get(UPLOAD_DIR,
+                String.valueOf(now.getYear()),
+                String.format("%02d", now.getMonthValue()),
+                String.format("%02d", now.getDayOfMonth()),
+                storedFilename);
+        assertThat(Files.exists(expectedPath)).isTrue();
 
         testFile.delete();
     }
@@ -216,10 +220,10 @@ class FileUploadIntegrationTest {
         assertThat(response.originalFileName()).doesNotContain("/");
         assertThat(response.originalFileName()).doesNotContain("\\");
 
-        // 저장 경로가 uploads 디렉토리 내부인지 확인
+        // 저장 파일명에 경로가 포함되지 않았는지 확인
         List<UploadHistory> histories = uploadHistoryRepository.findAll();
-        String storedPath = histories.get(0).getStoredFilename();
-        assertThat(storedPath).contains(UPLOAD_DIR);
+        String storedFilename = histories.get(0).getStoredFilename();
+        assertThat(storedFilename).doesNotContain(UPLOAD_DIR).doesNotContain(File.separator);
 
         maliciousFile.delete();
     }
